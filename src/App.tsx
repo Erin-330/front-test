@@ -2,7 +2,7 @@ import { Button } from './components/Button'
 
 function App() {
   return (
-    <div className="min-h-screen bg-red-500 flex flex-col items-center justify-center gap-8 p-8">
+    <div className="min-h-screen bg-purple-500 flex flex-col items-center justify-center gap-8 p-8">
       <h1 className="text-3xl font-bold text-gray-900">Button Component Demo</h1>
 
       <section className="flex flex-col gap-4 w-full max-w-lg">
