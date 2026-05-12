@@ -32,6 +32,25 @@ function App() {
           <Button variant="secondary" loading>Loading Secondary</Button>
         </div>
       </section>
+
+      <section className="flex flex-col gap-4 w-full max-w-lg">
+        <h2 className="text-lg font-semibold text-gray-700">Login</h2>
+        <div className="flex flex-col gap-3 bg-white rounded-xl p-6 shadow-md">
+          <input
+            type="email"
+            placeholder="이메일"
+            className="h-10 px-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            className="h-10 px-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <Button variant="primary" size="lg" onClick={() => alert('로그인')}>
+            로그인
+          </Button>
+        </div>
+      </section>
     </div>
   )
 }
