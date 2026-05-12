@@ -1,4 +1,5 @@
 import { Button } from './components/Button'
+import { KakaoLoginButton } from './components/KakaoLoginButton'
 
 function App() {
   return (
@@ -30,6 +31,19 @@ function App() {
           <Button disabled>Disabled</Button>
           <Button loading>Loading</Button>
           <Button variant="secondary" loading>Loading Secondary</Button>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-4 w-full max-w-lg">
+        <h2 className="text-lg font-semibold text-gray-700">카카오 로그인</h2>
+        <div className="flex flex-wrap items-center gap-3">
+          <KakaoLoginButton size="sm" onClick={() => alert('카카오 로그인 (sm)')} />
+          <KakaoLoginButton size="md" onClick={() => alert('카카오 로그인 (md)')} />
+          <KakaoLoginButton size="lg" onClick={() => alert('카카오 로그인 (lg)')} />
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <KakaoLoginButton disabled />
+          <KakaoLoginButton loading />
         </div>
       </section>
     </div>
