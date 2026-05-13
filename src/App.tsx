@@ -1,9 +1,12 @@
 import { Button } from './components/Button'
+import { Login } from './components/Login'
 
 function App() {
   return (
     <div className="min-h-screen bg-red-500 flex flex-col items-center justify-center gap-8 p-8">
       <h1 className="text-3xl font-bold text-gray-900">Button Component Demo</h1>
+
+      <Login />
 
       <section className="flex flex-col gap-4 w-full max-w-lg">
         <h2 className="text-lg font-semibold text-gray-700">Variants</h2>
