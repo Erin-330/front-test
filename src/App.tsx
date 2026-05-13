@@ -32,6 +32,15 @@ function App() {
           <Button variant="secondary" loading>Loading Secondary</Button>
         </div>
       </section>
+
+      <section className="flex flex-col gap-4 w-full max-w-lg">
+        <h2 className="text-lg font-semibold text-gray-700">Login</h2>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="primary" size="lg" onClick={() => alert('로그인')}>
+            로그인
+          </Button>
+        </div>
+      </section>
     </div>
   )
 }
