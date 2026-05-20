@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 function currentPath() {
   if (typeof window === 'undefined') return '/'
@@ -15,9 +15,10 @@ export function useHashRoute(): [string, (next: string) => void] {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
-  const navigate = (next: string) => {
+  const navigate = useCallback((next: string) => {
     window.location.hash = next
-  }
+    setPath(next || '/')
+  }, [])
 
   return [path, navigate]
 }
