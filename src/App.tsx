@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { MainPage } from './pages/MainPage'
 import { BackYourLeague } from './components/BackYourLeague'
+import { BackYourPlayer } from './components/BackYourPlayer'
 import { useAuth } from './hooks/useAuth'
 import { useHashRoute } from './hooks/useHashRoute'
 
@@ -10,18 +11,39 @@ function App() {
   const { user, signOut } = useAuth()
 
   useEffect(() => {
-    if (path === '/leagues' && !user) {
+    if ((path === '/leagues' || path === '/players') && !user) {
       navigate('/login')
     }
   }, [path, user, navigate])
 
+  if (path === '/players' && user) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center py-6">
+        <BackYourPlayer
+          onClose={() => {
+            signOut()
+            navigate('/')
+          }}
+          onBack={() => navigate('/leagues')}
+          onDone={() => {
+            signOut()
+            navigate('/')
+          }}
+        />
+      </div>
+    )
+  }
+
   if (path === '/leagues' && user) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center py-6">
-        <BackYourLeague onClose={() => {
-          signOut()
-          navigate('/')
-        }} />
+        <BackYourLeague
+          onClose={() => {
+            signOut()
+            navigate('/')
+          }}
+          onNext={() => navigate('/players')}
+        />
       </div>
     )
   }

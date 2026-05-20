@@ -91,11 +91,12 @@ function LeagueCard({ league }: { league: League }) {
   )
 }
 
-function NextStepButton() {
+function NextStepButton({ onClick }: { onClick?: () => void }) {
   return (
     <button
       type="button"
       aria-label="Next"
+      onClick={onClick}
       className="h-[48px] max-w-[96px] min-w-[80px] flex-1 rounded-[30px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.15)] relative bg-[#969cda] hover:bg-[#afb5ea] cursor-pointer"
     >
       <div className="absolute inset-0 flex items-center justify-center">
@@ -105,7 +106,7 @@ function NextStepButton() {
   )
 }
 
-export function BackYourLeague({ onClose }: { onClose?: () => void }) {
+export function BackYourLeague({ onClose, onNext }: { onClose?: () => void; onNext?: () => void }) {
   return (
     <div className="bg-[#46383a] flex flex-col items-start pb-[11px] px-[11px] w-full max-w-[382px] h-[816px] mx-auto">
       <div className="flex h-[48px] items-center justify-between opacity-[0.66] px-[4px] w-full shrink-0">
@@ -164,7 +165,7 @@ export function BackYourLeague({ onClose }: { onClose?: () => void }) {
               <div className="bg-[#b2bac3] rounded-[4px] size-[8px]" />
             </div>
           </div>
-          <NextStepButton />
+          <NextStepButton onClick={onNext} />
         </div>
       </div>
     </div>
