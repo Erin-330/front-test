@@ -3,39 +3,37 @@ const assets = {
   rorrLogoFill: '/figma/rorrLogoFill.svg',
   closeIcon: '/figma/close.svg',
   searchIcon: '/figma/search.svg',
-  headerButtonShape: '/figma/headerButtonShape.svg',
   addUserIcon: '/figma/selectArrow.svg',
   lightning: '/figma/lightning.svg',
   arrowRight: '/figma/vector1177Stroke.svg',
-  lck: '/figma/lck.svg',
-  lpl: '/figma/lpl.svg',
-  vcs: '/figma/vcs.png',
-  msi: '/figma/msi.png',
-  lec: '/figma/lec.png',
-  cblol: '/figma/cblol.png',
-  lla: '/figma/lla.png',
+  checkIcon: '/figma/check.svg',
+  t1: '/figma/t1.svg',
+  ktRolster: '/figma/ktRolster.png',
+  gen: '/figma/gen.svg',
+  hanwha: '/figma/hanwha.svg',
+  dplus: '/figma/dplus.svg',
+  weibo: '/figma/weibo.svg',
 }
 
-type League = {
+type Team = {
   id: string
   name: string
-  description: string
   logo: string
   logoFit: 'contain' | 'cover'
   hasBoost?: boolean
+  selectedNum?: number
 }
 
-const leagues: League[] = [
-  { id: 'lck', name: 'LCK', description: 'League of Legends Champions Korea', logo: assets.lck, logoFit: 'contain', hasBoost: true },
-  { id: 'lpl', name: 'LPL', description: 'League of Legends Pro League', logo: assets.lpl, logoFit: 'contain', hasBoost: true },
-  { id: 'vcs', name: 'VCS', description: 'Vietnam Championship Series', logo: assets.vcs, logoFit: 'cover', hasBoost: true },
-  { id: 'msi', name: 'MSI', description: 'Mid-Season Invitational', logo: assets.msi, logoFit: 'cover', hasBoost: true },
-  { id: 'lec', name: 'LEC', description: 'League of Legends EMEA Championship', logo: assets.lec, logoFit: 'cover' },
-  { id: 'cblol', name: 'CBLOL', description: 'Circuit Brazilian League of Legends', logo: assets.cblol, logoFit: 'cover' },
-  { id: 'lla1', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover' },
-  { id: 'lla2', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover' },
-  { id: 'lla3', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover' },
-  { id: 'lla4', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover', hasBoost: true },
+const teams: Team[] = [
+  { id: 't1', name: 'T1', logo: assets.t1, logoFit: 'contain', hasBoost: true, selectedNum: 1 },
+  { id: 'kt', name: 'KT Rollster', logo: assets.ktRolster, logoFit: 'cover', hasBoost: true },
+  { id: 'gen', name: 'GEN G', logo: assets.gen, logoFit: 'contain', selectedNum: 2 },
+  { id: 'hle', name: 'Hanwha Life Esports', logo: assets.hanwha, logoFit: 'contain' },
+  { id: 'dk', name: 'Dplus KIA', logo: assets.dplus, logoFit: 'contain' },
+  { id: 'wbg1', name: 'Weibo Gaming', logo: assets.weibo, logoFit: 'contain' },
+  { id: 'wbg2', name: 'Weibo Gaming', logo: assets.weibo, logoFit: 'contain' },
+  { id: 'wbg3', name: 'Weibo Gaming', logo: assets.weibo, logoFit: 'contain' },
+  { id: 'wbg4', name: 'Weibo Gaming', logo: assets.weibo, logoFit: 'contain', hasBoost: true },
 ]
 
 function BoostTag() {
@@ -63,30 +61,45 @@ function AddButton() {
   )
 }
 
-function LeagueCard({ league }: { league: League }) {
+function SelectedTag({ num }: { num: number }) {
   return (
-    <div className="bg-white flex gap-[4px] h-[68px] items-start rounded-[8px] shrink-0 w-full shadow-[0px_2px_2px_rgba(0,0,0,0.08)]">
+    <div className="bg-[#209fee] flex gap-[4px] h-full items-center justify-center overflow-hidden shrink-0 w-[54px] rounded-r-[8px]">
+      <div className="h-[9px] w-[13px] relative shrink-0">
+        <img src={assets.checkIcon} alt="" className="absolute inset-0 size-full" />
+      </div>
+      <p className="font-light text-[14px] text-white leading-[20px]">{num}</p>
+    </div>
+  )
+}
+
+function TeamCard({ team }: { team: Team }) {
+  const selected = team.selectedNum !== undefined
+  return (
+    <div
+      className={`bg-white flex gap-[4px] h-[68px] items-start rounded-[8px] shrink-0 w-full overflow-hidden ${
+        selected
+          ? 'border-2 border-[#209fee]'
+          : 'shadow-[0px_2px_2px_rgba(0,0,0,0.08)]'
+      }`}
+    >
       <div className="flex flex-1 gap-[12px] h-full items-center min-w-0 px-[12px]">
         <div className="flex items-center p-[2px] rounded-[6px] shrink-0">
-          <div className={`relative shrink-0 size-[28px] ${league.logoFit === 'cover' ? 'overflow-hidden' : ''}`}>
+          <div className={`relative shrink-0 size-[28px] ${team.logoFit === 'cover' ? 'overflow-hidden' : ''}`}>
             <img
-              src={league.logo}
-              alt={league.name}
-              className={`absolute inset-0 size-full ${league.logoFit === 'cover' ? 'object-cover' : 'object-contain'}`}
+              src={team.logo}
+              alt={team.name}
+              className={`absolute inset-0 size-full ${team.logoFit === 'cover' ? 'object-cover' : 'object-contain'}`}
             />
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-[4px] items-start justify-center min-w-0">
-          {league.hasBoost && <BoostTag />}
+          {team.hasBoost && <BoostTag />}
           <p className="font-bold leading-none text-[20px] text-black overflow-hidden text-ellipsis whitespace-nowrap min-w-full">
-            {league.name}
-          </p>
-          <p className="font-normal leading-[1.2] text-[#757b90] text-[12px] overflow-hidden text-ellipsis whitespace-nowrap min-w-full">
-            {league.description}
+            {team.name}
           </p>
         </div>
       </div>
-      <AddButton />
+      {selected ? <SelectedTag num={team.selectedNum!} /> : <AddButton />}
     </div>
   )
 }
@@ -106,7 +119,30 @@ function NextStepButton({ onClick }: { onClick?: () => void }) {
   )
 }
 
-export function BackYourLeague({ onClose, onNext }: { onClose?: () => void; onNext?: () => void }) {
+function PrevStepButton({ onClick }: { onClick?: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-label="Previous"
+      onClick={onClick}
+      className="h-[48px] max-w-[96px] min-w-[80px] flex-1 rounded-[30px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.15)] relative bg-[#969cda] hover:bg-[#afb5ea] cursor-pointer"
+    >
+      <div className="absolute inset-0 flex items-center justify-center">
+        <img src={assets.arrowRight} alt="" className="w-[18px] h-[14px] -scale-x-100" />
+      </div>
+    </button>
+  )
+}
+
+export function BackYourTeam({
+  onClose,
+  onBack,
+  onNext,
+}: {
+  onClose?: () => void
+  onBack?: () => void
+  onNext?: () => void
+}) {
   return (
     <div className="bg-[#46383a] flex flex-col items-start pb-[11px] px-[11px] w-full max-w-[382px] h-[816px] mx-auto">
       <div className="flex h-[48px] items-center justify-between opacity-[0.66] px-[4px] w-full shrink-0">
@@ -134,11 +170,11 @@ export function BackYourLeague({ onClose, onNext }: { onClose?: () => void; onNe
       <div className="bg-[#f0f2f5] flex flex-1 items-start min-h-0 min-w-[288px] overflow-hidden rounded-[16px] w-full relative">
         <div className="flex flex-1 flex-col gap-[16px] h-full items-start min-w-0 overflow-y-auto pb-[80px] pt-[12px] px-[16px] relative">
           <div className="flex flex-col gap-[4px] h-[68px] items-start text-black w-[215px] shrink-0">
-            <p className="font-semibold leading-[1.5] text-[24px] w-full">Back Your League</p>
-            <p className="font-light leading-[20px] text-[14px] w-full">Follow your favorite Leagues</p>
+            <p className="font-semibold leading-[1.5] text-[24px] w-full">Back Your Team</p>
+            <p className="font-light leading-[20px] text-[14px] w-full">Follow your favorite Teams</p>
           </div>
-          {leagues.map((league) => (
-            <LeagueCard key={league.id} league={league} />
+          {teams.map((team) => (
+            <TeamCard key={team.id} team={team} />
           ))}
         </div>
 
@@ -153,13 +189,13 @@ export function BackYourLeague({ onClose, onNext }: { onClose?: () => void; onNe
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 flex gap-[10px] items-center justify-center px-[16px] py-[8px] backdrop-blur-[3px] bg-[rgba(255,255,255,0.01)]">
-          <div className="h-[48px] max-w-[96px] min-w-[80px] flex-1 opacity-0" />
+          <PrevStepButton onClick={onBack} />
           <div className="flex flex-1 gap-[4px] items-center max-w-[190px] min-w-0 px-[5px] py-[10px]">
-            <div className="flex flex-1 flex-col items-center justify-center min-w-0">
-              <div className="bg-[#2d39b4] h-[8px] rounded-[4px] w-full" />
-            </div>
             <div className="flex flex-1 items-center justify-center min-w-0">
               <div className="bg-[#b2bac3] rounded-[4px] size-[8px]" />
+            </div>
+            <div className="flex flex-1 flex-col items-center justify-center min-w-0">
+              <div className="bg-[#2d39b4] h-[8px] rounded-[4px] w-full" />
             </div>
             <div className="flex flex-1 items-center justify-center min-w-0">
               <div className="bg-[#b2bac3] rounded-[4px] size-[8px]" />
