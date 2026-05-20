@@ -32,6 +32,14 @@ function App() {
           <Button variant="secondary" loading>Loading Secondary</Button>
         </div>
       </section>
+
+      <section className="flex flex-col gap-4 w-full max-w-lg">
+        <h2 className="text-lg font-semibold text-gray-700">Navigation</h2>
+        <div className="flex flex-wrap gap-3">
+          <Button onClick={() => { window.location.href = '/login#/' }}>Login</Button>
+          <Button onClick={() => { window.location.href = '/login#/leagues' }}>League</Button>
+        </div>
+      </section>
     </div>
   )
 }
