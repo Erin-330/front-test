@@ -8,8 +8,8 @@ function App() {
       <section className="flex flex-col gap-4 w-full max-w-lg">
         <h2 className="text-lg font-semibold text-gray-700">Variants</h2>
         <div className="flex flex-wrap gap-3">
-          <Button variant="primary" onClick={() => alert('primary')}>Primary</Button>
-          <Button variant="secondary" onClick={() => alert('secondary')}>Secondary</Button>
+          <Button variant="primary" onClick={() => { window.location.hash = '/' }}>Login</Button>
+          <Button variant="secondary" onClick={() => { window.location.hash = '/leagues' }}>League</Button>
           <Button variant="danger" onClick={() => alert('danger')}>Danger</Button>
           <Button variant="ghost" onClick={() => alert('ghost')}>Ghost</Button>
         </div>
