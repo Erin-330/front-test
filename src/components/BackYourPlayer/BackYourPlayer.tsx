@@ -69,10 +69,12 @@ function SelectedNum({ num, onClick }: { num: number; onClick: () => void }) {
       type="button"
       aria-label={`Selected ${num}`}
       onClick={onClick}
-      className="bg-[#209fee] flex h-full gap-[4px] items-center justify-center overflow-hidden px-[12px] rounded-r-[6px] shrink-0 w-[54px] cursor-pointer"
+      className="bg-[#209fee] flex h-full gap-[4px] items-center justify-center overflow-hidden px-[12px] shrink-0 w-[54px] cursor-pointer"
     >
       <img src={assets.checkmark} alt="" className="w-[13px] h-[9px]" />
-      <p className="font-light text-[14px] text-white leading-[20px]">{num}</p>
+      <p className="font-light text-[14px] text-white leading-[20px]">
+        {String(num).padStart(2, '0')}
+      </p>
     </button>
   )
 }
@@ -123,12 +125,15 @@ function PlayerCard({
   )
 }
 
-function DoneButton({ onClick }: { onClick?: () => void }) {
+function DoneButton({ onClick, disabled }: { onClick?: () => void; disabled?: boolean }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="h-[48px] max-w-[96px] min-w-[80px] flex-1 rounded-[30px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.15)] bg-[#969cda] hover:bg-[#afb5ea] cursor-pointer flex items-center justify-center"
+      disabled={disabled}
+      className={`h-[48px] max-w-[96px] min-w-[80px] flex-1 rounded-[30px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.15)] bg-[#969cda] flex items-center justify-center ${
+        disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#afb5ea] cursor-pointer'
+      }`}
     >
       <p className="font-bold text-[16px] text-white leading-[20px]">Done</p>
     </button>
@@ -159,7 +164,7 @@ export function BackYourPlayer({
   onBack?: () => void
   onDone?: () => void
 }) {
-  const [selected, setSelected] = useState<string[]>(['faker', 'oner', 'bdd'])
+  const [selected, setSelected] = useState<string[]>([])
 
   const toggleSelection = (id: string) => {
     setSelected((prev) =>
@@ -233,7 +238,7 @@ export function BackYourPlayer({
               <div className="bg-[#2d39b4] h-[8px] rounded-[4px] w-full" />
             </div>
           </div>
-          <DoneButton onClick={onDone} />
+          <DoneButton onClick={onDone} disabled={selected.length === 0} />
         </div>
       </div>
     </div>

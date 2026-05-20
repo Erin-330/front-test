@@ -5,40 +5,34 @@ const assets = {
   rorrLogoFill: '/figma/rorrLogoFill.svg',
   closeIcon: '/figma/close.svg',
   searchIcon: '/figma/search.svg',
-  headerButtonShape: '/figma/headerButtonShape.svg',
   addUserIcon: '/figma/selectArrow.svg',
   lightning: '/figma/lightning.svg',
   arrowRight: '/figma/vector1177Stroke.svg',
   checkmark: '/figma/checkmark.svg',
-  lck: '/figma/lck.svg',
-  lpl: '/figma/lpl.svg',
-  vcs: '/figma/vcs.png',
-  msi: '/figma/msi.png',
-  lec: '/figma/lec.png',
-  cblol: '/figma/cblol.png',
-  lla: '/figma/lla.png',
+  t1Logo: '/figma/t1Logo.svg',
+  ktRolster: '/figma/ktRolster.svg',
+  gengLogo: '/figma/gengLogo.svg',
 }
 
-type League = {
+type Team = {
   id: string
   name: string
   description: string
   logo: string
-  logoFit: 'contain' | 'cover'
   hasBoost?: boolean
 }
 
-const leagues: League[] = [
-  { id: 'lck', name: 'LCK', description: 'League of Legends Champions Korea', logo: assets.lck, logoFit: 'contain', hasBoost: true },
-  { id: 'lpl', name: 'LPL', description: 'League of Legends Pro League', logo: assets.lpl, logoFit: 'contain', hasBoost: true },
-  { id: 'vcs', name: 'VCS', description: 'Vietnam Championship Series', logo: assets.vcs, logoFit: 'cover', hasBoost: true },
-  { id: 'msi', name: 'MSI', description: 'Mid-Season Invitational', logo: assets.msi, logoFit: 'cover', hasBoost: true },
-  { id: 'lec', name: 'LEC', description: 'League of Legends EMEA Championship', logo: assets.lec, logoFit: 'cover' },
-  { id: 'cblol', name: 'CBLOL', description: 'Circuit Brazilian League of Legends', logo: assets.cblol, logoFit: 'cover' },
-  { id: 'lla1', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover' },
-  { id: 'lla2', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover' },
-  { id: 'lla3', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover' },
-  { id: 'lla4', name: 'LEC', description: 'League of Legends in Hispanic America', logo: assets.lla, logoFit: 'cover', hasBoost: true },
+const teams: Team[] = [
+  { id: 't1', name: 'T1', description: 'T1 Esports', logo: assets.t1Logo, hasBoost: true },
+  { id: 'kt', name: 'KT Rolster', description: 'KT Rolster', logo: assets.ktRolster, hasBoost: true },
+  { id: 'geng', name: 'Gen.G', description: 'Gen.G Esports', logo: assets.gengLogo, hasBoost: true },
+  { id: 'drx', name: 'DRX', description: 'DRX', logo: assets.t1Logo },
+  { id: 'dk', name: 'Dplus KIA', description: 'Dplus KIA', logo: assets.ktRolster },
+  { id: 'hle', name: 'Hanwha Life Esports', description: 'Hanwha Life Esports', logo: assets.gengLogo },
+  { id: 'ns', name: 'Nongshim RedForce', description: 'Nongshim RedForce', logo: assets.t1Logo },
+  { id: 'bro', name: 'OK BRION', description: 'OKSavingsBank BRION', logo: assets.ktRolster },
+  { id: 'kdf', name: 'Kwangdong Freecs', description: 'Kwangdong Freecs', logo: assets.gengLogo },
+  { id: 'fox', name: 'DN Freecs', description: 'DN Freecs', logo: assets.t1Logo, hasBoost: true },
 ]
 
 function BoostTag() {
@@ -83,12 +77,12 @@ function SelectedNum({ num, onClick }: { num: number; onClick: () => void }) {
   )
 }
 
-function LeagueCard({
-  league,
+function TeamCard({
+  team,
   selectedIndex,
   onToggle,
 }: {
-  league: League
+  team: Team
   selectedIndex: number
   onToggle: () => void
 }) {
@@ -101,21 +95,21 @@ function LeagueCard({
     >
       <div className="flex flex-1 gap-[12px] h-full items-center min-w-0 px-[12px]">
         <div className="flex items-center p-[2px] rounded-[6px] shrink-0">
-          <div className={`relative shrink-0 size-[28px] ${league.logoFit === 'cover' ? 'overflow-hidden' : ''}`}>
+          <div className="relative shrink-0 size-[28px]">
             <img
-              src={league.logo}
-              alt={league.name}
-              className={`absolute inset-0 size-full ${league.logoFit === 'cover' ? 'object-cover' : 'object-contain'}`}
+              src={team.logo}
+              alt={team.name}
+              className="absolute inset-0 size-full object-contain"
             />
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-[4px] items-start justify-center min-w-0">
-          {league.hasBoost && <BoostTag />}
+          {team.hasBoost && <BoostTag />}
           <p className="font-bold leading-none text-[20px] text-black overflow-hidden text-ellipsis whitespace-nowrap min-w-full">
-            {league.name}
+            {team.name}
           </p>
           <p className="font-normal leading-[1.2] text-[#757b90] text-[12px] overflow-hidden text-ellipsis whitespace-nowrap min-w-full">
-            {league.description}
+            {team.description}
           </p>
         </div>
       </div>
@@ -146,7 +140,30 @@ function NextStepButton({ onClick, disabled }: { onClick?: () => void; disabled?
   )
 }
 
-export function BackYourLeague({ onClose, onNext }: { onClose?: () => void; onNext?: () => void }) {
+function BackButton({ onClick }: { onClick?: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-label="Back"
+      onClick={onClick}
+      className="h-[48px] max-w-[96px] min-w-[80px] flex-1 rounded-[30px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.15)] relative bg-[#969cda] hover:bg-[#afb5ea] cursor-pointer"
+    >
+      <div className="absolute inset-0 flex items-center justify-center">
+        <img src={assets.arrowRight} alt="" className="w-[18px] h-[14px] -scale-x-100" />
+      </div>
+    </button>
+  )
+}
+
+export function BackYourTeam({
+  onClose,
+  onBack,
+  onNext,
+}: {
+  onClose?: () => void
+  onBack?: () => void
+  onNext?: () => void
+}) {
   const [selected, setSelected] = useState<string[]>([])
 
   const toggleSelection = (id: string) => {
@@ -182,17 +199,17 @@ export function BackYourLeague({ onClose, onNext }: { onClose?: () => void; onNe
       <div className="bg-[#f0f2f5] flex flex-1 items-start min-h-0 min-w-[288px] overflow-hidden rounded-[16px] w-full relative">
         <div className="flex flex-1 flex-col gap-[16px] h-full items-start min-w-0 overflow-y-auto pb-[80px] pt-[12px] px-[16px] relative">
           <div className="flex flex-col gap-[4px] h-[68px] items-start text-black w-[215px] shrink-0">
-            <p className="font-semibold leading-[1.5] text-[24px] w-full">Back Your League</p>
-            <p className="font-light leading-[20px] text-[14px] w-full">Follow your favorite Leagues</p>
+            <p className="font-semibold leading-[1.5] text-[24px] w-full">Back Your Team</p>
+            <p className="font-light leading-[20px] text-[14px] w-full">Follow your favorite Teams</p>
           </div>
-          {leagues.map((league) => {
-            const idx = selected.indexOf(league.id)
+          {teams.map((team) => {
+            const idx = selected.indexOf(team.id)
             return (
-              <LeagueCard
-                key={league.id}
-                league={league}
+              <TeamCard
+                key={team.id}
+                team={team}
                 selectedIndex={idx >= 0 ? idx + 1 : 0}
-                onToggle={() => toggleSelection(league.id)}
+                onToggle={() => toggleSelection(team.id)}
               />
             )
           })}
@@ -209,13 +226,13 @@ export function BackYourLeague({ onClose, onNext }: { onClose?: () => void; onNe
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 flex gap-[10px] items-center justify-center px-[16px] py-[8px] backdrop-blur-[3px] bg-[rgba(255,255,255,0.01)]">
-          <div className="h-[48px] max-w-[96px] min-w-[80px] flex-1 opacity-0" />
+          <BackButton onClick={onBack} />
           <div className="flex flex-1 gap-[4px] items-center max-w-[190px] min-w-0 px-[5px] py-[10px]">
-            <div className="flex flex-1 flex-col items-center justify-center min-w-0">
-              <div className="bg-[#2d39b4] h-[8px] rounded-[4px] w-full" />
-            </div>
             <div className="flex flex-1 items-center justify-center min-w-0">
               <div className="bg-[#b2bac3] rounded-[4px] size-[8px]" />
+            </div>
+            <div className="flex flex-1 flex-col items-center justify-center min-w-0">
+              <div className="bg-[#2d39b4] h-[8px] rounded-[4px] w-full" />
             </div>
             <div className="flex flex-1 items-center justify-center min-w-0">
               <div className="bg-[#b2bac3] rounded-[4px] size-[8px]" />
