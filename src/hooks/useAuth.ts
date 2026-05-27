@@ -29,8 +29,11 @@ export function useAuth() {
     return () => window.removeEventListener('storage', onStorage)
   }, [])
 
-  const signIn = useCallback((next: AuthUser) => {
+  const signIn = useCallback((next: AuthUser, accessToken?: string) => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+    if (accessToken) {
+      window.localStorage.setItem('accessToken', accessToken)
+    }
     setUser(next)
   }, [])
 

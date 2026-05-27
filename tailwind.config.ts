@@ -6,16 +6,13 @@ export default {
     extend: {
       fontFamily: {
         sans: [
-          'Pretendard',
+          'Hanken Grotesk',
           '-apple-system',
           'BlinkMacSystemFont',
           'system-ui',
           'Roboto',
           'Helvetica Neue',
           'Segoe UI',
-          'Apple SD Gothic Neo',
-          'Noto Sans KR',
-          'Malgun Gothic',
           'sans-serif',
         ],
       },
@@ -25,6 +22,23 @@ export default {
           card: '#F0F2F5',
           ink: '#202020',
         },
+        azure: {
+          primary: '#0052cc',
+          'primary-hover': '#0747a6',
+          'primary-active': '#053780',
+          surface: '#ffffff',
+          bg: '#f4f6fb',
+          ink: '#1a1f2c',
+          muted: '#5b6478',
+          border: '#dfe3ec',
+          error: '#ba1a1a',
+        },
+      },
+      boxShadow: {
+        'azure-card': '0 8px 24px rgba(0, 82, 204, 0.08)',
+      },
+      borderRadius: {
+        azure: '8px',
       },
     },
   },
