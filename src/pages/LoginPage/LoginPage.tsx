@@ -1,3 +1,4 @@
+import { EmailPasswordForm } from '../../components/EmailPasswordForm'
 import { GoogleLoginButton } from '../../components/GoogleLoginButton'
 import { PitchInteractiveLogo, RorrLogo } from '../../components/Logos'
 import { useAuth } from '../../hooks/useAuth'
@@ -55,7 +56,24 @@ export function LoginPage({ onClose, onSignedIn }: LoginPageProps) {
             Log in / Sign up
           </h1>
 
-          <div className="mt-12 flex flex-1 flex-col items-center justify-center">
+          <div className="mt-12 flex flex-1 flex-col items-center justify-center gap-6">
+            <EmailPasswordForm
+              onSuccess={(data) => {
+                signIn({
+                  name: data.user.name,
+                  email: data.user.email,
+                  picture: data.user.profile_image,
+                })
+                onSignedIn?.()
+              }}
+            />
+
+            <div className="flex w-full max-w-sm items-center gap-3 text-[12px] text-brand-ink/40">
+              <span className="h-px flex-1 bg-white/20" aria-hidden="true" />
+              <span>or</span>
+              <span className="h-px flex-1 bg-white/20" aria-hidden="true" />
+            </div>
+
             <GoogleLoginButton onClick={handleGoogleSignIn} />
 
             <div className="mt-6 flex items-center gap-3 text-[14px] font-light text-brand-ink/80">
