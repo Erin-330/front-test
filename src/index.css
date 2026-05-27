@@ -10,8 +10,9 @@
   }
 
   body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui,
-      'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-family: 'Hanken Grotesk', 'Pretendard', -apple-system,
+      BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR',
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
