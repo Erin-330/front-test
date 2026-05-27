@@ -18,6 +18,14 @@ export default {
           'Malgun Gothic',
           'sans-serif',
         ],
+        hanken: [
+          'Hanken Grotesk',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'system-ui',
+          'Roboto',
+          'sans-serif',
+        ],
       },
       colors: {
         brand: {
