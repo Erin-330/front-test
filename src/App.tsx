@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { MainPage } from './pages/MainPage'
+import { EsportsNewsPage } from './pages/EsportsNewsPage'
 import { BackYourLeague } from './components/BackYourLeague'
 import { BackYourTeam } from './components/BackYourTeam'
 import { BackYourPlayer } from './components/BackYourPlayer'
@@ -16,6 +17,40 @@ function App() {
       navigate('/login')
     }
   }, [path, user, navigate])
+
+  const isNewsRoute =
+    path === '/' ||
+    path === '/news' ||
+    path === '/matches' ||
+    path.startsWith('/news/') ||
+    path.startsWith('/matches/')
+
+  if (isNewsRoute) {
+    return (
+      <EsportsNewsPage
+        onSelectMatch={(id) => navigate(`/matches/${id}`)}
+        onSelectArticle={(id) => navigate(`/news/${id}`)}
+        onNavigate={(key) => {
+          if (key === 'profile') {
+            navigate(user ? '/leagues' : '/login')
+          } else if (key === 'home' || key === 'news') {
+            navigate('/news')
+          } else if (key === 'matches') {
+            navigate('/matches')
+          }
+        }}
+      />
+    )
+  }
+
+  if (path === '/legacy') {
+    return (
+      <MainPage
+        onLogin={() => navigate('/login')}
+        onLeague={() => navigate('/leagues')}
+      />
+    )
+  }
 
   if (path === '/players' && user) {
     return (
