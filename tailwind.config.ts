@@ -21,7 +21,7 @@ export default {
       },
       colors: {
         brand: {
-          bg: '#46383a',
+          bg: '#FFC0CB',
           card: '#F0F2F5',
           ink: '#202020',
         },
