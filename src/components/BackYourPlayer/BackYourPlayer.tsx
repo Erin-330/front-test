@@ -173,7 +173,7 @@ export function BackYourPlayer({
   }
 
   return (
-    <div className="bg-[#46383a] flex flex-col items-start pb-[11px] px-[11px] w-full max-w-[382px] h-[816px] mx-auto">
+    <div className="bg-[#FFC0CB] flex flex-col items-start pb-[11px] px-[11px] w-full max-w-[382px] h-[816px] mx-auto">
       <div className="flex h-[48px] items-center justify-between opacity-[0.66] px-[4px] w-full shrink-0">
         <div className="flex gap-[6px] items-center justify-center">
           <div className="flex items-center justify-center">
