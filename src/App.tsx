@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { MainPage } from './pages/MainPage'
+import { EsportsPage } from './pages/EsportsPage'
 import { BackYourLeague } from './components/BackYourLeague'
 import { BackYourTeam } from './components/BackYourTeam'
 import { BackYourPlayer } from './components/BackYourPlayer'
@@ -16,6 +17,10 @@ function App() {
       navigate('/login')
     }
   }, [path, user, navigate])
+
+  if (path === '/esports' || path === '/') {
+    return <EsportsPage />
+  }
 
   if (path === '/players' && user) {
     return (
