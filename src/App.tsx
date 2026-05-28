@@ -19,7 +19,7 @@ function App() {
 
   if (path === '/players' && user) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center py-6">
+      <div className="min-h-screen bg-white flex items-center justify-center py-6">
         <BackYourPlayer
           onClose={() => {
             signOut()
@@ -37,7 +37,7 @@ function App() {
 
   if (path === '/teams' && user) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center py-6">
+      <div className="min-h-screen bg-white flex items-center justify-center py-6">
         <BackYourTeam
           onClose={() => {
             signOut()
@@ -52,7 +52,7 @@ function App() {
 
   if (path === '/leagues' && user) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center py-6">
+      <div className="min-h-screen bg-white flex items-center justify-center py-6">
         <BackYourLeague
           onClose={() => {
             signOut()
