@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { MainPage } from './pages/MainPage'
+import { ProfilePage } from './pages/ProfilePage'
 import { BackYourLeague } from './components/BackYourLeague'
 import { BackYourTeam } from './components/BackYourTeam'
 import { BackYourPlayer } from './components/BackYourPlayer'
@@ -12,10 +13,31 @@ function App() {
   const { user, signOut } = useAuth()
 
   useEffect(() => {
-    if ((path === '/leagues' || path === '/teams' || path === '/players') && !user) {
+    if (
+      (path === '/leagues' ||
+        path === '/teams' ||
+        path === '/players' ||
+        path === '/profile') &&
+      !user
+    ) {
       navigate('/login')
     }
   }, [path, user, navigate])
+
+  if (path === '/profile' && user) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] py-6">
+        <ProfilePage
+          user={user}
+          onClose={() => navigate('/')}
+          onSignOut={() => {
+            signOut()
+            navigate('/')
+          }}
+        />
+      </div>
+    )
+  }
 
   if (path === '/players' && user) {
     return (
