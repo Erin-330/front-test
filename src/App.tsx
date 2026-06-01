@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { MainPage } from './pages/MainPage'
+import { UserDetailPage } from './pages/UserDetailPage'
 import { BackYourLeague } from './components/BackYourLeague'
 import { BackYourTeam } from './components/BackYourTeam'
 import { BackYourPlayer } from './components/BackYourPlayer'
@@ -16,6 +17,16 @@ function App() {
       navigate('/login')
     }
   }, [path, user, navigate])
+
+  const userDetailMatch = path.match(/^\/users\/([^/]+)$/)
+  if (userDetailMatch) {
+    return (
+      <UserDetailPage
+        userId={userDetailMatch[1]}
+        onClose={() => navigate('/')}
+      />
+    )
+  }
 
   if (path === '/players' && user) {
     return (
