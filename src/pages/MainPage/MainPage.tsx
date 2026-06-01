@@ -3,13 +3,34 @@ import { PitchInteractiveLogo, RorrLogo } from '../../components/Logos'
 interface MainPageProps {
   onLogin: () => void
   onLeague: () => void
+  onAccount?: () => void
+  isAuthenticated?: boolean
 }
 
-export function MainPage({ onLogin, onLeague }: MainPageProps) {
+export function MainPage({ onLogin, onLeague, onAccount, isAuthenticated }: MainPageProps) {
   return (
     <div className="flex min-h-full flex-col bg-brand-bg">
       <header className="flex items-center justify-between px-6 py-5 opacity-[0.66] sm:px-10">
         <RorrLogo className="text-xl" />
+        {isAuthenticated && onAccount && (
+          <button
+            type="button"
+            onClick={onAccount}
+            aria-label="My account"
+            className="inline-flex h-9 items-center gap-2 rounded-full border border-white/30 px-3 text-[13px] font-medium text-white transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="5.5" r="2.75" stroke="currentColor" strokeWidth="1.4" />
+              <path
+                d="M2.5 13.5c.9-2.3 3-3.5 5.5-3.5s4.6 1.2 5.5 3.5"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+            My Account
+          </button>
+        )}
       </header>
 
       <main className="flex flex-1 px-4 pb-4 sm:px-6 sm:pb-6">
