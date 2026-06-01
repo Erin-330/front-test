@@ -1,21 +1,42 @@
 import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { MainPage } from './pages/MainPage'
+import { UserDetailPage } from './pages/UserDetailPage'
 import { BackYourLeague } from './components/BackYourLeague'
 import { BackYourTeam } from './components/BackYourTeam'
 import { BackYourPlayer } from './components/BackYourPlayer'
 import { useAuth } from './hooks/useAuth'
 import { useHashRoute } from './hooks/useHashRoute'
 
+const USER_DETAIL_PATTERN = /^\/users\/([^/]+)$/
+
 function App() {
   const [path, navigate] = useHashRoute()
   const { user, signOut } = useAuth()
 
+  const userDetailMatch = path.match(USER_DETAIL_PATTERN)
+
   useEffect(() => {
-    if ((path === '/leagues' || path === '/teams' || path === '/players') && !user) {
+    const requiresAuth =
+      path === '/leagues' ||
+      path === '/teams' ||
+      path === '/players' ||
+      USER_DETAIL_PATTERN.test(path)
+    if (requiresAuth && !user) {
       navigate('/login')
     }
   }, [path, user, navigate])
+
+  if (userDetailMatch && user) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center py-6">
+        <UserDetailPage
+          userId={decodeURIComponent(userDetailMatch[1])}
+          onClose={() => navigate('/')}
+        />
+      </div>
+    )
+  }
 
   if (path === '/players' && user) {
     return (
