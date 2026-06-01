@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { MainPage } from './pages/MainPage'
+import { UserDetailPage } from './pages/UserDetailPage'
 import { BackYourLeague } from './components/BackYourLeague'
 import { BackYourTeam } from './components/BackYourTeam'
 import { BackYourPlayer } from './components/BackYourPlayer'
 import { useAuth } from './hooks/useAuth'
 import { useHashRoute } from './hooks/useHashRoute'
+
+const USER_DETAIL_PATTERN = /^\/users\/([^/]+)$/
 
 function App() {
   const [path, navigate] = useHashRoute()
@@ -16,6 +19,12 @@ function App() {
       navigate('/login')
     }
   }, [path, user, navigate])
+
+  const userDetailMatch = path.match(USER_DETAIL_PATTERN)
+  if (userDetailMatch) {
+    const id = decodeURIComponent(userDetailMatch[1])
+    return <UserDetailPage id={id} onClose={() => navigate('/')} />
+  }
 
   if (path === '/players' && user) {
     return (
