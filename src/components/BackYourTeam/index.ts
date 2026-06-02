@@ -1,1 +1,0 @@
-export { BackYourTeam } from './BackYourTeam'
