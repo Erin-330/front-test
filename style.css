@@ -1,0 +1,9 @@
+body {
+  background-color: #FFC0CB; /* pink */
+  margin: 0;
+}
+
+.container {
+  min-height: 100vh;
+  background-color: #FFC0CB; /* pink */
+}
